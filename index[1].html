@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Okaida Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #07070c; color: #e8e8f0; font-family: Rajdhani, system-ui, sans-serif; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    a { color: inherit; }
+    header, main { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,.1); padding: 18px 20px; }
+    .logo { font-family: Orbitron, sans-serif; letter-spacing: .2em; }
+    .logo span { color: #a78bfa; }
+    nav { display: flex; gap: 16px; align-items: center; }
+    nav button, .ghost { background: none; border: 0; color: #a1a1aa; font-weight: 700; }
+    nav button.on { color: #fff; }
+    .pill { border: 1px solid rgba(255,255,255,.15); border-radius: 8px; padding: 6px 12px; color: #fff; }
+    .hero { text-align: center; padding: 72px 0 40px; }
+    h1, h2, .brand { font-family: Orbitron, sans-serif; }
+    h1 { font-size: clamp(2rem, 6vw, 3.4rem); letter-spacing: .12em; }
+    h1 em { color: #a78bfa; font-style: normal; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card, .box { background: #0e0e16; border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 20px; }
+    .price { font-family: Orbitron, sans-serif; }
+    .stock { color: #34d399; font-size: 12px; letter-spacing: .12em; font-weight: 700; }
+    .add { border: 1px solid rgba(167,139,250,.4); background: rgba(139,92,246,.15); color: #ddd6fe; border-radius: 8px; padding: 8px 12px; font-weight: 700; }
+    .drawer { position: fixed; inset: 0; background: rgba(0,0,0,.7); display: flex; justify-content: flex-end; }
+    aside { width: min(420px, 100%); background: #101018; padding: 24px; border-left: 1px solid rgba(255,255,255,.1); }
+    .primary { width: 100%; background: #8b5cf6; border: 0; border-radius: 10px; padding: 12px; font-weight: 800; letter-spacing: .12em; }
+    input { width: 100%; margin-top: 8px; background: rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.15); color: #fff; border-radius: 8px; padding: 8px 10px; }
+    .key { font-family: Orbitron, sans-serif; color: #67e8f9; letter-spacing: .16em; font-size: 1.6rem; }
+    .screen { background: #000; border: 1px solid #3f3f46; border-radius: 16px 16px 0 0; padding: 12px; }
+    .screen img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 6px; display: block; }
+    .neck { width: 96px; height: 32px; background: #3f3f46; margin: 0 auto; }
+    .base { width: 190px; height: 12px; background: #52525b; margin: 0 auto 40px; border-radius: 0 0 12px 12px; }
+    .hidden { display: none; }
+    footer { text-align: center; color: #71717a; font-size: 12px; border-top: 1px solid rgba(255,255,255,.1); padding: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">◆ OKAIDA <span>MENU</span></div>
+    <nav>
+      <button class="on" data-tab="loja">Loja</button>
+      <button data-tab="clientes">Clientes</button>
+      <button data-tab="metodo">Método 7 tela</button>
+      <button class="pill" id="open-cart">Carrinho</button>
+    </nav>
+  </header>
+  <main>
+    <section id="loja">
+      <div class="hero">
+        <h1>Okaida <em>Menu</em></h1>
+        <p>Rage, Xit Spoofer, Bypass e DMA. Cada um por US$ 14.</p>
+      </div>
+      <div class="grid" id="products"></div>
+      <h2 style="text-align:center;letter-spacing:.2em;margin:48px 0 16px">STATUS</h2>
+      <div class="grid" id="status"></div>
+    </section>
+    <section id="clientes" class="hidden" style="padding:48px 0">
+      <h1>Clientes</h1>
+      <div class="box" style="margin-top:20px">
+        <button id="vsync-toggle" style="width:100%;background:none;border:0;display:flex;justify-content:space-between;font-family:Orbitron,sans-serif">
+          <span>Vsync</span><span id="vsync-sign">+</span>
+        </button>
+        <ul id="vsync-list" class="hidden grid" style="margin:16px 0 0;padding:0;list-style:none"></ul>
+      </div>
+      <div class="box" style="margin-top:14px;font-family:Orbitron,sans-serif">Emocionados da Got e companhia</div>
+    </section>
+    <section id="metodo" class="hidden" style="padding:48px 0;text-align:center">
+      <h1>Método 7 tela</h1>
+      <div style="max-width:760px;margin:28px auto 0">
+        <div class="screen"><img src="monitor-gorilla.jpg" alt="Gorila" /></div>
+        <div class="neck"></div>
+        <div class="base"></div>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 Okaida Menu</footer>
+  <div id="drawer" class="drawer hidden">
+    <aside>
+      <div style="display:flex;justify-content:space-between"><strong id="drawer-title">Carrinho</strong><button id="close-cart" style="background:none;border:0">Fechar</button></div>
+      <div id="drawer-body" style="margin-top:20px"></div>
+    </aside>
+  </div>
+  <script>
+    const PRICE = 14;
+    const KEY = "4002 8922";
+    const PRODUCTS = [
+      ["rage", "Rage", "Menu com funções de rage."],
+      ["xit", "Xit Spoofer", "Spoofer de identificadores."],
+      ["bypass", "Bypass", "Bypass listado na loja."],
+      ["dma", "DMA", "Firmware e setup DMA."]
+    ];
+    const MEMBERS = ["Okaida","Gb","Trembala","Kujin","Dvd","Matue","Arthur Moura","Coyote","Dias","Damon","Ppcoins","Levi","Maju","Fiona","Lyrah","Mascote","Toretto","Yuri","Fernando Aguiar","Dz","Fk","Fabio","John","Joao","Lis","Ruivo","Rz","Sid","Texas","Thiago","Vitim","Vovo"];
+    const cart = {};
+    let step = "cart";
+    const $ = (s) => document.querySelector(s);
+    function money(n) { return "US$ " + n; }
+    function count() { return Object.values(cart).reduce((a, b) => a + b, 0); }
+    function renderProducts() {
+      $("#products").innerHTML = PRODUCTS.map(([id, title, blurb]) => `
+        <article class="card">
+          <h3>${title}</h3>
+          <p>${blurb}</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
+            <div><div class="price">${money(PRICE)}</div><div class="stock">EM ESTOQUE</div></div>
+            <button class="add" data-add="${id}">Adicionar ao carrinho</button>
+          </div>
+        </article>`).join("");
+      $("#status").innerHTML = PRODUCTS.map(([, title]) => `<div class="card">${title}<div class="stock">EM ESTOQUE</div></div>`).join("");
+      $("#vsync-list").innerHTML = MEMBERS.map((n) => `<li class="card">${n}</li>`).join("");
+      $("#open-cart").textContent = "Carrinho" + (count() ? " (" + count() + ")" : "");
+    }
+    function lines() { return PRODUCTS.filter(([id]) => cart[id]).map(([id, title]) => ({ id, title, qty: cart[id] })); }
+    function renderDrawer() {
+      const body = $("#drawer-body");
+      $("#drawer-title").textContent = step === "checkout" ? "Finalizar compra" : step === "done" ? "Pedido" : "Carrinho";
+      if (step === "done") {
+        body.innerHTML = `<p>Pedido confirmado.</p><img src="order-gorilla.png" alt="" style="width:100%;border-radius:12px;margin-top:12px" /><p class="key">${KEY}</p><button class="pill" id="copy">Copiar chave</button>`;
+        $("#copy").onclick = () => navigator.clipboard.writeText(KEY.replace(" ", ""));
+        return;
+      }
+      const items = lines();
+      if (!items.length) { body.innerHTML = "<p>Carrinho vazio.</p>"; return; }
+      const total = count() * PRICE;
+      body.innerHTML = items.map((l) => `<div style="display:flex;justify-content:space-between;margin-bottom:10px"><span>${l.title}</span><span><button data-q="${l.id}" data-d="-1">−</button> ${l.qty} <button data-q="${l.id}" data-d="1">+</button></span></div>`).join("")
+        + `<p class="price">Total ${money(total)}</p>`
+        + (step === "checkout"
+          ? `<label>Utilize o cupom <b>Okaida</b><input placeholder="Okaida" /></label><p class="key">${KEY}</p><button class="primary" id="confirm">Confirmar pedido</button>`
+          : `<button class="primary" id="finish">Finalizar compra</button>`);
+      body.querySelectorAll("[data-q]").forEach((b) => b.onclick = () => {
+        const id = b.dataset.q;
+        cart[id] = (cart[id] || 0) + Number(b.dataset.d);
+        if (cart[id] <= 0) delete cart[id];
+        renderProducts(); renderDrawer();
+      });
+      const finish = $("#finish");
+      if (finish) finish.onclick = () => { step = "checkout"; renderDrawer(); };
+      const confirm = $("#confirm");
+      if (confirm) confirm.onclick = () => { Object.keys(cart).forEach((k) => delete cart[k]); step = "done"; renderProducts(); renderDrawer(); };
+    }
+    document.body.addEventListener("click", (e) => {
+      const add = e.target.closest("[data-add]");
+      if (add) { cart[add.dataset.add] = (cart[add.dataset.add] || 0) + 1; step = "cart"; renderProducts(); $("#drawer").classList.remove("hidden"); renderDrawer(); }
+      const tab = e.target.closest("[data-tab]");
+      if (tab) {
+        document.querySelectorAll("[data-tab]").forEach((b) => b.classList.toggle("on", b === tab));
+        ["loja", "clientes", "metodo"].forEach((id) => $("#" + id).classList.toggle("hidden", id !== tab.dataset.tab));
+      }
+    });
+    $("#open-cart").onclick = () => { step = count() ? "cart" : "cart"; $("#drawer").classList.remove("hidden"); renderDrawer(); };
+    $("#close-cart").onclick = () => $("#drawer").classList.add("hidden");
+    $("#drawer").onclick = (e) => { if (e.target.id === "drawer") $("#drawer").classList.add("hidden"); };
+    $("#vsync-toggle").onclick = () => {
+      $("#vsync-list").classList.toggle("hidden");
+      $("#vsync-sign").textContent = $("#vsync-list").classList.contains("hidden") ? "+" : "−";
+    };
+    renderProducts();
+  </script>
+</body>
+</html>
